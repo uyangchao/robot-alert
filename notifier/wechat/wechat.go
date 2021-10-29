@@ -1,4 +1,4 @@
-package notifier
+package wechat
 
 import "github.com/gin-gonic/gin"
 

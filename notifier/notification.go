@@ -5,32 +5,29 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/pkg/errors"
-	"github.com/prometheus/alertmanager/template"
 )
 
-func SendAlert(c *gin.Context) {
-	var Data template.Data
-	err := c.BindJSON(&Data)
-	if err != nil {
+// func SendAlert(c *gin.Context) {
+// 	var Data template.Data
+// 	err := c.BindJSON(&Data)
+// 	if err != nil {
 
-	}
+// 	}
 
-}
+// }
 
 type NotificationResponse struct {
 	ErrorMessage string `json:"errmsg"`
 	ErrorCode    int    `json:"errcode"`
 }
 
-type Alerter struct {
-	Url     string `json:"url"`
-	Context []byte `json:"context"`
+type Notifier struct {
+	Url string `json:"url"`
 }
 
-func (a *Alerter) Send(body string) (*NotificationResponse, error) {
-	httpReq, err := http.NewRequest("POST", a.Url, bytes.NewReader(a.Context))
+func (a *Notifier) Send(context []byte) (*NotificationResponse, error) {
+	httpReq, err := http.NewRequest("POST", a.Url, bytes.NewReader(context))
 	if err != nil {
 		return nil, errors.Wrap(err, "error building DingTalk request")
 	}
@@ -58,4 +55,10 @@ func (a *Alerter) Send(body string) (*NotificationResponse, error) {
 	}
 
 	return &robotResp, nil
+}
+
+func NewNotifier(url string) *Notifier {
+	return &Notifier{
+		Url: url,
+	}
 }

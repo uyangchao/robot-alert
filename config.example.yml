@@ -1,0 +1,9 @@
+dingtalk:
+  webhook1:
+    url: https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxx
+    secret: SEC000000000000000000000
+  webhook2:
+    url: https://oapi.dingtalk.com/robot/send?access_token=xxxxxxxxxxxx
+wechat:
+  webhook1:
+    url: https://qyapi.weixin.qq.com/cgi-bin/webhook/send?key=xxxxxxxxxxxx
